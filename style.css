@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+footer{
+    width: 100%;
+    height: 22vh;
+    position: absolute;
+    background: linear-gradient(#838383, #dcdcdc,#838383);
+    bottom: 0;
+}
+#gombok{
+    background-color: royalblue;
+    height: 22vh;
+    width: 40vw;
+    float: right;
+}
+footer button{
+    width: 25vw;
+    height: 10vh;
+    border-radius: 20%;
+    border: 5px solid black;
+    font-size: 7.5vh;
+}
+#action1{
+    background-color: rgb(182, 103, 103);
+}#action2{
+    background: linear-gradient(rgb(174, 142, 14),#48300c);
+}#action3{
+    background: linear-gradient(rgb(43, 182, 35) ,#1c4913);
+}#action4{
+    background: linear-gradient(#1a84bd, rgba(19, 45, 85, 0.8));
+}
+#szoveg{
+    float: left;
+}
+#info1{
+    width: 25vw;
+    height: 15vh;
+    position: absolute;
+    top: 10vh;
+    left: 0;
+    background-color: rgb(179, 179, 179);
+    font-size: 3.5vw;
+}
+#info2{
+    width: 25vw;
+    height: 15vh;
+    position: absolute;
+    bottom: 30vh;
+    right: 0;
+    background-color: rgb(179, 179, 179);
+}
+h2{
+    margin: 1.5vh;
+    font-size: 2.5vw;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+#main{
+    background-color: green;
+    width: 100%;
+    height: 100vh;
+}
+#pokemon1{
+    width: 20vw;
+    height: 20vw;
+    position: absolute;
+    left: 75vw;
+    top: 5vh;
+}
+#pokemon2{
+    width: 20vw;
+    height: 20vw;
+    position: absolute;
+    left: 5vw;
+    top: 30vh;
+}
+#hp1tarto{
+    background-color: rgb(175, 175, 175);
+    width: 12.5825vw;
+    height: 2.5vh;
+    border: 1px solid black;
+    margin: 1vw;
+}
+#hp2tarto{
+    background-color: rgb(175, 175, 175);
+    width: 12.5825vw;
+    height: 2.5vh;
+    border: 1px solid black;
+    margin: 1vw;
+}
+#hp1{
+    background-color: green;
+    margin: 0.15vh;
+    width: 12.5vw;
+    height: 2.3vh;
+}
+#hp2{
+    background-color: green;
+    margin: 0.15vh;
+    width: 12.5vw;
+    height: 2.3vh;
+}
+#szoveg button{
+    width: 22.5vw;
+}
+#szoveg{
+    float: left;
+    box-sizing: border-box;
+}
+#szoveg p {
+    text-align: justify;
+    float: left;
+    font-size: 4vw;
+}
+#szoveg button{
+    float: right;
+}
+#vissza{
+    background-color: red;
+    width: 10vw;
+    height: 6vh;
+    font-size: 4vh;
+    margin-top: 50px;
+}

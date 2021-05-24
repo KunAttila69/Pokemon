@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="main">
+        <div id="info1"><h2 id="nev1">Pidgeon</h2></h2><div id="hp1tarto"><div id="hp1"></div></div></div>
+        <div id="info2"><h2 id="nev2">Pikachu</h2><div id="hp2tarto"><div id="hp2"></div></div></div>
+        <div id="pokemon1"></div>
+        <div id="pokemon2"></div>
+    <div>
+    <footer id="footer">
+        <div id="szoveg">
+        </div>
+        <table id="gombok">
+            <tr>
+            <td><button id="action1" onclick="AttackMenu(1)">Fight</button></td>
+            <td><button id="action2">Bag</button></td>
+            </tr>
+            <tr>
+            <td><button id="action3">Pokémon</button></td>
+            <td><button id="action4">Run</button></td>
+            </tr>
+        </table>
+    </footer>
+</body>
+<script src="pokemonok.js"></script>
+<script>
+    var pokemon1 = pokemonok[Math.floor(Math.random()*151)]
+    var pokemon2 = pokemonok[Math.floor(Math.random()*151)]
+    var randomTamadasok = []
+    var hp1 = 12.5
+    var hp2 = 12.5
+    var healValue = [1,2,3,4,5,6,7,8]
+    var mindBlown = [4,5,6,7,8,9]
+    var selfDamage = [1,2,3,4]
+    var AquaTail = [4,5,6,7]
+    var enemyRandomTamadasok = []
+    var poisoned1 = false
+    var poisoned2 = false
+    var poisonDamage = [2,3,4,5]
+    var poisonedRounds1 = 0
+    var poisonedRounds2 = 0
+    var paralyzed = false
+
+    document.getElementById("szoveg").innerHTML = "<p>Wild "+pokemon1.name+" appeared!<p>"
+
+    var tamadasok = ["Recover","Poison Gas","Bite","Scratch","Mind Blown","Aqua Tail",]
+    tamadasok = tamadasok.sort(() => Math.random() - 0.5);
+    for (let i = 0; i < 4; i++) {
+        randomTamadasok[i] = tamadasok.pop()
+    }
+    tamadasok = ["Recover","Poison Gas","Bite","Scratch","Mind Blown","Aqua Tail"]
+    tamadasok = tamadasok.sort(() => Math.random() - 0.5);
+    for (let i = 0; i < 4; i++) {
+        enemyRandomTamadasok[i] = tamadasok.pop()
+    }
+    
+    
+    document.getElementById("pokemon1").style.background = "url('kepek/"+pokemon1.kepe+"')"
+    document.getElementById("pokemon2").style.background = "url('kepek/"+pokemon2.kepe+"')"
+    document.getElementById("pokemon1").style.backgroundSize = "cover"
+    document.getElementById("pokemon2").style.backgroundSize = "cover"
+    document.getElementById("nev1").innerHTML = pokemon1.name
+    document.getElementById("nev2").innerHTML = pokemon2.name
+
+    function Vissza(){
+        document.getElementById("footer").innerHTML = '<div id="szoveg"></div><table id="gombok"><tr><td><button id="action1" onclick="AttackMenu(1)">Fight</button></td><td><button id="action2">Bag</button></td></tr><tr><td><button id="action3">Pokémon</button></td><td><button id="action4">Run</button></td></tr></table>'
+    }
+
+    function AttackMenu(){
+        document.getElementById("footer").innerHTML = ""
+        for (let i = 0; i < 4; i++) {
+            document.getElementById("footer").innerHTML += "<button id='tamadas"+i+"' onclick='Attack("+i+")'>"+randomTamadasok[i]+"</button>"
+            
+        }
+        document.getElementById("footer").innerHTML += "<button id='vissza' onclick='Vissza()'>Back</button>"
+    }
+
+    function Attack(tamadasID){
+        var tamadas = document.getElementById("tamadas"+tamadasID).innerHTML
+
+        if(tamadas == "Recover"){
+            healValue = healValue.sort(() => Math.random() - 0.5);
+            hp2 += healValue[3]*0.5
+            if(hp2 >= 12.5){
+                hp2 = 12.5
+            }
+        }else if(tamadas == "Poison Gas"){
+            poisoned1 = true
+        }else if(tamadas == "Bite"){
+            paralyze = Math.floor(Math.random()*100)
+            if(paralyze < 30){
+                paralyzed = true
+            }
+            hp1 -= 2
+        }else if(tamadas == "Scratch"){
+            hp1 -= 5*0.5
+        }else if(tamadas == "Mind Blown"){
+            mindBlown = mindBlown.sort(() => Math.random() - 0.5);
+            selfDamage = selfDamage.sort(() => Math.random() - 0.5);
+        
+            hp1 -= mindBlown[2]*0.5
+            hp2 -= selfDamage[1] 
+        }else if(tamadas == "Aqua Tail"){
+            AquaTail = AquaTail.sort(() => Math.random() - 0.5);
+
+            hp1 -= AquaTail[1]*0.5
+        }
+
+        if(hp1 <= 0){
+            alert("Nyertél")
+            hp1 = 0
+            location.reload()
+        }else if(hp2 <= 0){
+            alert("Vesztettél")
+            hp2 = 0
+            location.reload()
+        }
+
+        document.getElementById("hp1").style.width = hp1 +"vw"
+        document.getElementById("hp2").style.width = hp2 +"vw"
+
+        Vissza()
+        if(paralyzed != true){
+            EnemyTamadas()
+        }else{
+            paralyzed = false
+        }
+
+        Poison()
+    }
+    function EnemyTamadas(){
+        var enemyTamadas = enemyRandomTamadasok[Math.floor(Math.random()*4)]
+
+        if(enemyTamadas == "Recover"){
+            healValue = healValue.sort(() => Math.random() - 0.5);
+            hp1 += healValue[3]*0.5
+            if(hp1 >= 12.5){
+                hp1 = 12.5
+            }
+        }else if(enemyTamadas == "Poison Gas"){
+            poisoned2 = true
+        }else if(enemyTamadas == "Bite"){
+            paralyze = Math.floor(Math.random()*100)
+            if(paralyze > 30){
+                EnemyTamadas()
+            }
+            hp2 -= 2
+        }else if(enemyTamadas == "Scratch"){
+            hp2 -= 5*0.5
+        }else if(enemyTamadas == "Mind Blown"){
+            mindBlown = mindBlown.sort(() => Math.random() - 0.5);
+            selfDamage = selfDamage.sort(() => Math.random() - 0.5);
+        
+            hp2 -= mindBlown[2]*0.5
+            hp1 -= selfDamage[1] 
+        }else if(enemyTamadas == "Aqua Tail"){
+            AquaTail = AquaTail.sort(() => Math.random() - 0.5);
+
+            hp2 -= AquaTail[1]*0.5
+        }
+        if(hp2 <= 0){
+            alert("Vesztettél")
+            hp2 = 0
+            location.reload()
+        }
+
+        document.getElementById("szoveg").innerHTML = "<p>"+pokemon1.name+" used "+enemyTamadas+"<p>"
+        document.getElementById("hp1").style.width = hp1 +"vw"
+        document.getElementById("hp2").style.width = hp2 +"vw"
+    }
+    function Poison(){
+        if(poisoned1 == true){
+            poisonDamage = poisonDamage.sort(() => Math.random() - 0.5);
+
+            hp1 -= poisonDamage[3]*0.5
+            poisonedRounds1++
+            if(poisonedRounds1 >= 3){
+                poisoned1 = false
+            }
+            if(hp1 <= 0){
+            alert("Nyertél")
+            hp1 = 0
+            location.reload()
+            }else if(hp2 <= 0){
+                alert("Vesztettél")
+                hp2 = 0
+                location.reload()
+            }
+        }else if(poisoned2 == true){
+            poisonDamage = poisonDamage.sort(() => Math.random() - 0.5);
+
+            hp2 -= poisonDamage[3]*0.5
+            poisonedRounds2++
+            if(poisonedRounds2 >= 3){
+                poisoned2 = false
+            }
+            if(hp1 <= 0){
+            alert("Nyertél")
+            hp1 = 0
+            location.reload()
+            }else if(hp2 <= 0){
+                alert("Vesztettél")
+                hp2 = 0
+                location.reload()
+            }
+        }
+        
+
+        document.getElementById("hp1").style.width = hp1 +"vw"
+        document.getElementById("hp2").style.width = hp2 +"vw"
+    }
+</script>
+</html>

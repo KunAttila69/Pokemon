@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <title>Hello, world!</title>
+    <style>
+        body{
+            background-color: red;
+        }
+        .row .col-md-3{
+            background-color: red;
+            height: 50vh;
+            border: 1vw solid black;
+            margin: 1vh 3vw;
+            padding: 0;
+        }
+        .kep{
+            width: 17.35vw;
+            height: 32.5vh;
+            background-color: turquoise;
+            background-size: cover;
+        }
+        h2{
+            float: right;
+            position: relative;
+            top: -5.5vh;
+        }
+    </style>
+</head>
+<body>
+      <div class="container" id="container">
+          
+      </div>
+  </body>
+  <script src="pokemonok.js"></script>
+  <script>
+      valami = 0
+      for (let i = 0; i < 51; i++) {
+          document.getElementById("container").innerHTML += "<div class='row' id='sor"+i+"'></div>"
+        for (let j = 0; j < 3; j++) {
+            document.getElementById("sor"+i).innerHTML += '<div class="col-md-3"><div class="kep" id="kep'+valami+'"></div><h1>'+pokemonok[valami].name+'</h1><h2>'+pokemonok[valami].sorszam+'</h2></div>'
+            document.getElementById("kep"+valami).style.backgroundImage = "url('kepek/"+pokemonok[valami].kepe+"')"
+            valami++
+        }
+          
+      }
+  </script>
+</html>
